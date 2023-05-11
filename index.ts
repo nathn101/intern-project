@@ -37,15 +37,15 @@ const TO_TOKEN = ETH;
 
   // Calculate slippage on the swap.
   // Money gained from the sale of the USDC tokens
-  const cur = BigNumber.from(((FROM_BALANCE.toNumber() * from_price) as unknown) as string);
+  const cur = FROM_BALANCE.mul(from_price);
   // ETH tokens gained from purchasing using the money gained from the sale of the USDC tokens
-  const ETHtokens = BigNumber.from(((cur.toNumber() / to_price) as unknown) as string);
+  const ETHtokens = cur.div(to_price);
   // Slippage is the difference between the ETH tokens gained from the swap and the ETH tokens gained from a manual transaction
-  const slippage = BigNumber.from(((ETHtokens.toNumber() - swapBalance.toNumber()) as unknown) as string);
+  const slippage = ETHtokens.sub(swapBalance);
 
 
   // TODO:
-  const slippagePercent = slippage.toNumber() / swapBalance.toNumber();
+  const slippagePercent = slippage.div(swapBalance);
 
-  console.info(`Slippage: ${slippagePercent * 100}%`);
+  console.info(`Slippage: ${slippagePercent.toNumber() * 100}%`);
 })();
