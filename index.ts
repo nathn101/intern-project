@@ -34,9 +34,6 @@ const TO_TOKEN = ETH;
   // TODO:
   const swapBalance = BigNumber.from((ETHamnt as unknown) as string);
 
-  // The swapBalance should be in units of wei
-  console.info(`Estimated swap balance: ${swapBalance.toString()} ${TO_TOKEN.symbol}`);
-
   // Figure out spot values of tokens.
 
   let client = new CoinGeckoClient({
@@ -82,6 +79,8 @@ const TO_TOKEN = ETH;
   let swap_ether = ethers.utils.formatUnits(swapBalance.mul(1000000), "ether");
   // console.log(swap_ether);
   
+  console.info(`Estimated swap balance: ${swap_ether.toString()} ETH`);
+
   // TODO:
   const slippagePercent =  ((slip_ether as unknown) as number) / ((swap_ether as unknown) as number);
 
